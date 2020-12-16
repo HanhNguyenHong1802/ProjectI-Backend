@@ -41,10 +41,12 @@ require('./seed')
 
 var app = express();
 
-// view engine setup
+// view engine setup 
+//(khởi tạo và thiết lập công cụ hỗ trợ cho việc kết nối, điều hướng và truy xuất đến cơ sở dữ liệu MongoDB )
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
+app.set('view engine', 'jade');// gọi ra các mẫu được định nghĩa sẵn trong những thư mục jade,
+//trong quá trình chạy những file .jade sẽ gọi đến dữ liệu để thay thế vào những biến trong mẫu sẵn,
+//sau đó trả về dạng HTML lên front-end cho người dùng
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -56,14 +58,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(fileUpload());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/menu', menuRouter);
-app.use('/members', membersRouter);
+app.use('/', indexRouter);                    //Dùng CORS và những routers (định tuyến)
+app.use('/users', usersRouter);               //từ thư mục routes để điều hướng,  
+app.use('/menu', menuRouter);                 //đưa dư liệu từ các tệp trong thư mục model
+app.use('/members', membersRouter);           //lên server 
 app.use('/comments', commentsRouter);
 app.use('/feedbacks', feedbacksRouter);
 
-// catch 404 and forward to error handler
+// catch 404 and forward to error handler (xử lý lỗi nếu không kết nối được với database)
 app.use(function(req, res, next) {
   next(createError(404));
 });
