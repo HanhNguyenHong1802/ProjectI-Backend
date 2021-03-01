@@ -11,7 +11,7 @@ const experienceSchema = new Schema({
 		type: String,
 		default: ''
 	},
-	description:{
+	location:{
 		type: String,
 		default: ''
 	},
