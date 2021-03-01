@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const drinkSchema = new Schema({
+const adventureSchema = new Schema({
 	name: {
 		type: String,
 		required: true,
@@ -27,6 +27,6 @@ const drinkSchema = new Schema({
 	tiemstamps:{}
 });
 
-var Drinks = mongoose.model('Drink',drinkSchema);
-module.exports = Drinks;
+var adventure = mongoose.model('adventure',adventureSchema);
+module.exports = adventure;
 
