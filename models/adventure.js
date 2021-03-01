@@ -1,20 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const memberSchema = new Schema({
-	firstname: {
+const adventureSchema = new Schema({
+	name: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
-	lastname: {
-		type: String,
-		required: true
-	},
-	email:{
-		type: String,
-		default: ''
-	},
-	tel:{
+	type: {
 		type: String,
 		default: ''
 	},
@@ -25,11 +18,15 @@ const memberSchema = new Schema({
 	image:{
 		type: String,
 		required: true
+	},
+	recommended:{
+		type: Boolean,
+		default:false
 	}
 },{
 	tiemstamps:{}
 });
 
-var Members = mongoose.model('Member',memberSchema);
-module.exports = Members;
+var adventure = mongoose.model('adventure',adventureSchema);
+module.exports = adventure;
 
