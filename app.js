@@ -16,6 +16,7 @@ const menuRouter = require('./routes/menu');
 const commentsRouter = require('./routes/comments');
 const membersRouter = require('./routes/members');
 const feedbacksRouter = require('./routes/feedbacks');
+const orderRouter = require('./routes/orders')
 
 const mongoose = require('mongoose');
 const url = config.mongoUrl;
@@ -50,6 +51,7 @@ app.use('/menu', menuRouter);
 app.use('/members', membersRouter);
 app.use('/comments', commentsRouter);
 app.use('/feedbacks', feedbacksRouter);
+app.use('/orders', orderRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

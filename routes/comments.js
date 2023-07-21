@@ -17,6 +17,7 @@ router.route('/')
 		cmts = await Comments.find(req.query).populate('author');
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(cmts);
 	}
     catch(err) {
@@ -31,6 +32,7 @@ router.route('/')
 			cmt = await Comments.findById(cmt._id).populate('author');
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 			res.json(cmt);  
 			console.log('Successfully created the new comment: '+cmt);  
 		}
@@ -48,6 +50,7 @@ router.route('/')
 		result = await Comments.remove({});
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(result);
 		console.log(result);  	
 	} 
@@ -65,6 +68,7 @@ router.route('/:commentId')
 		cmt = await Comments.findById(req.params.commentId).populate('author');
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(cmt);
 	}
     catch(err) {
@@ -87,6 +91,7 @@ router.route('/:commentId')
 				cmt = await Comments.findById(cmt._id).populate('author')
 				res.statusCode = 200;
 				res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 				res.json(cmt);  
 				console.log('Successfully updated the comment: '+cmt);  						
 			}	
@@ -111,6 +116,7 @@ router.route('/:commentId')
 		if (cmt) {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 			res.json(cmt);  
 			console.log('The comment: '+cmt+' has been deleted');  						
 		}

@@ -16,6 +16,7 @@ router.get('/',cors.corsWithOptions, authenticate.checkUser, authenticate.checkA
 	.then((users) => {
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(users);
 	})
 	.catch((err) =>next(err));
@@ -93,6 +94,7 @@ router.post('/login', cors.corsWithOptions, (req, res, next) => {
 		token = authenticate.getToken({_id: req.user._id});
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json({success: true, status: 'Login Successful!', isAdmin:user.isAdmin, token: token});
 	});
 	})(req, res, next);
@@ -106,6 +108,7 @@ router.route('/:userId')
 		if (user){
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 			res.json(user);
 			console.log('The user: '+user+' has been deleted');
 		}  	 	

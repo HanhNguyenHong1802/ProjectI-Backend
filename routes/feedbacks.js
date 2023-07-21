@@ -17,6 +17,7 @@ router.route('/')
 		feedbacks = await Feedbacks.find(req.query);
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(feedbacks);
 	}
     catch(err) {
@@ -29,6 +30,7 @@ router.route('/')
 			feedback = await Feedbacks.create(req.body)
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 			res.json(feedback);  
 			console.log('Successfully created the new feedback: '+feedback);  
 		}
@@ -46,6 +48,7 @@ router.route('/')
 		result = await Feedbacks.remove({});
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(result);
 		console.log(result);  	
 	} 
@@ -63,6 +66,7 @@ router.route('/:feedbackId')
 		feedback = await Feedbacks.findById(req.params.feedbackId);
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(feedback);
 	}
     catch(err) {
@@ -74,6 +78,7 @@ router.route('/:feedbackId')
 		feedback = await Feedbacks.findByIdAndRemove(req.params.feedbackId);
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(feedback);
 		console.log('The feedback: '+feedback+' has been deleted');  	 	
 	} 
