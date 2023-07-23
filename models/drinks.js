@@ -24,7 +24,7 @@ const drinkSchema = new Schema({
     default: false
   },
   price: {
-    type: number,
+    type: Number,
     min: 1000, 
     default:0,
   }

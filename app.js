@@ -22,7 +22,7 @@ const url = config.mongoUrl;
 const connect = mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, });
 
 connect.then((db) => {
-    console.log("Connected to the database.");
+  console.log("Connected to the database.");
 }, (err) => { console.log(err); });
 require('./seed')
 
@@ -41,7 +41,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: true }));
 // Use CORS and File Upload modules here
-app.use(cors());
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}));
 app.use(fileUpload());
 
 app.use('/', indexRouter);
@@ -52,12 +57,12 @@ app.use('/comments', commentsRouter);
 app.use('/feedbacks', feedbacksRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 app.use('/public', express.static(__dirname + '/public'));
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
