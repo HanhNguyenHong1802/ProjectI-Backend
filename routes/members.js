@@ -17,6 +17,7 @@ router.route('/')
 		members = await Members.find(req.query);
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(members);
 	}
     catch(err) {
@@ -29,6 +30,7 @@ router.route('/')
 			member = await Members.create(req.body)
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 			res.json(member);  
 			console.log('Successfully created the new member: ',member);  
 		}
@@ -46,6 +48,7 @@ router.route('/')
 		result = await Members.remove({});
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(result);
 		console.log(result);  	
 	} 
@@ -63,6 +66,7 @@ router.route('/:memberId')
 		member = await Members.findById(req.params.memberId);
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(member);
 	}
     catch(err) {
@@ -76,6 +80,7 @@ router.route('/:memberId')
 							$set: req.body}, {new:true})
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 			res.json(member);  
 			console.log('Successfully updated the new member: ',member);  
 		}
@@ -93,6 +98,7 @@ router.route('/:memberId')
 		result = await Members.findByIdAndRemove(req.params.memberId);
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(result);
 		console.log(result);  	
 	} 

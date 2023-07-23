@@ -17,6 +17,7 @@ router.route('/')
 		drinks = await Drinks.find(req.query).populate('comments.author');
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(drinks);
 	}
     catch(err) {
@@ -29,6 +30,7 @@ router.route('/')
 			drink = await Drinks.create(req.body)
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 			res.json(drink);  
 			console.log('Successfully created the new drink: '+drink);  
 		}
@@ -46,6 +48,7 @@ router.route('/')
 		result = await Drinks.remove({});
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(result);
 		console.log(result);  	
 	} 
@@ -63,6 +66,7 @@ router.route('/:drinkId')
 		drink = await Drinks.findById(req.params.drinkId).populate('comments.author');
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(drink);
 	}
     catch(err) {
@@ -76,6 +80,7 @@ router.route('/:drinkId')
 			              $set: req.body}, {new : false})
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 			res.json(drink);  
 			console.log('Successfully updated the drink: '+drink);  
 		}
@@ -93,6 +98,7 @@ router.route('/:drinkId')
 		drink = await Drinks.findByIdAndRemove(req.params.drinkId);
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 		res.json(drink);
 		console.log('The drink: '+drink+' has been deleted');  	 	
 	} 
