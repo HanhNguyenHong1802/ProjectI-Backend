@@ -58,48 +58,43 @@ router.route("/:author").get(cors.cors, async (req, res, next) => {
 });
 router
   .route("/:orderId")
-  .put(
-    cors.corsWithOptions,
-    authenticate.checkUser,
-    authenticate.checkAdmin,
-    async (req, res, next) => {
-      if (req.body != null) {
-        try {
-          order = Orders.findById(req.params.orderId);
-          if (order != null) {
-            if (!order.author.equals(req.user._id) && !order.author.isAdmin) {
-              err = new Error("You can not modify others' orders.");
-              err.status = 403;
-              next(err);
-            }
-            req.body.author = req.user._id;
-            order = await Orders.findByIdAndUpdate(
-              req.params.orderId,
-              {
-                $set: req.body,
-              },
-              { new: true }
-            ).exec();
-            order = await Orders.findById(order._id).populate("author");
-            res.statusCode = 200;
-            res.setHeader("Content-Type", "application/json");
-            res.json(order);
-            console.log("Successfully updated the order: " + order);
-          } else {
-            err = new Error("Order " + req.params.orderId + " does not exist.");
-            err.status = 404;
-            next(err);
-          }
-        } catch (error) {
+  .put(cors.corsWithOptions, authenticate.checkUser, async (req, res, next) => {
+    if (req.body != null) {
+      try {
+        order = await Orders.findById(req.params.orderId);
+        if (order != null) {
+          // if (!order.author._id.equals(req.author) && !order.author.isAdmin) {
+          //   err = new Error("You can not modify others' orders.");
+          //   err.status = 403;
+          //   next(err);
+          // }
+          req.body.author = req.user._id;
+          order = await Orders.findByIdAndUpdate(
+            req.params.orderId,
+            {
+              $set: req.body,
+            },
+            { new: false }
+          ).exec();
+          order = await Orders.findById(order._id).populate("author");
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.json(order);
+          console.log("Successfully updated the order: " + order);
+        } else {
+          err = new Error("Order " + req.params.orderId + " does not exist.");
+          err.status = 404;
           next(err);
         }
-      } else {
-        err = new Error("The request body is empty.");
-        err.status = 404;
-        next(err);
+      } catch (error) {
+        next(error);
       }
+    } else {
+      err = new Error("The request body is empty.");
+      err.status = 404;
+      next(err);
     }
-  )
+  })
   .delete(
     cors.corsWithOptions,
     authenticate.checkUser,

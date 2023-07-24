@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema(
   {
     author: {
-      type: String,
-      require: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     table: {
       type: Number,
