@@ -98,7 +98,6 @@ router
   .delete(
     cors.corsWithOptions,
     authenticate.checkUser,
-    authenticate.checkAdmin,
     async (req, res, next) => {
       try {
         order = await Orders.findByIdAndRemove(req.params.orderId);
