@@ -23,6 +23,10 @@ const orderSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    complete: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
